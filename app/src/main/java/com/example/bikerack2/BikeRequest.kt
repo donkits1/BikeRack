@@ -41,14 +41,11 @@ class BikeRequest() {
 
                 if (read.status == HttpStatusCode.OK) {
                     data = read.readText()
-//                    val id = Gson().fromJson(data, Customer::class.java)
-//                    customerID = id.userid.toString()//.toString()
-                } else if (read.status == HttpStatusCode.BadRequest) { //400
+                } else if (read.status == HttpStatusCode.BadRequest) {
                     Log.e(TAG, "Bad Request")
                 } else {
                     Log.e(TAG, "Undefined Error")
                 }
-//                data = read.readText()
             }
         } catch (e: Exception) {
             Log.e("Error", e.toString())
@@ -72,7 +69,6 @@ class BikeRequest() {
                         method = HttpMethod.Get
 
                         headers {
-//                        contentType(ContentType.Application.Json)
                             append(HttpHeaders.Accept, "application/json")
                             append(HttpHeaders.Accept, "text/html")
                         }
@@ -88,15 +84,6 @@ class BikeRequest() {
                     Log.e(TAG, "Undefined Error")
                 }
 
-//                if(read.status == HttpStatusCode.NotFound) {
-//                    customerID = ""
-//                } else {
-//
-//                    data = read.readText()
-//                    val id = Gson().fromJson(data, Customer::class.java)
-//                    customerID = id.userid.toString()//.toString()
-//                }
-
             }
         } catch (e: Exception) {
             Log.e("Error", e.toString())
@@ -105,14 +92,11 @@ class BikeRequest() {
         }
 
         confirm = true
-
     }
 
-    suspend fun returningCustomerAddTRX(order: String, total: Int, id: String = "") {
+    suspend fun customerTRX(order: String, total: Int, id: String = "") {
         val client = HttpClient()
 
-        //add customer, make trx w
-        //make trx with id
         if (id == "")
             Log.e("asdf","no id found")
         else {
@@ -128,7 +112,6 @@ class BikeRequest() {
                                 append(HttpHeaders.Accept, "text/html")
                             }
                         }
-                    //data = read.readText()
                     if(read.status != HttpStatusCode.OK)
                         Log.e(TAG, "Something Went Wrong")
                 }
@@ -139,11 +122,9 @@ class BikeRequest() {
             }
         }
     }
-    suspend fun newCustomerAddTRX(customerName: String = "") {
+    suspend fun addNewCustomer(customerName: String = "") {
         val client = HttpClient()
 
-        //add customer, make trx w
-        //make trx with id
         if (customerName == "")
             Log.e("asdf","no name found")
         else {
@@ -159,7 +140,6 @@ class BikeRequest() {
                                 append(HttpHeaders.Accept, "text/html")
                             }
                         }
-                    //data = read.readText()
                     if(read.status != HttpStatusCode.OK)
                         Log.e(TAG, "Something Went Wrong")
                 }
@@ -186,7 +166,6 @@ class BikeRequest() {
                             append(HttpHeaders.Accept, "text/html")
                         }
                     }
-                //data = read.readText()
                 if(read.status != HttpStatusCode.OK)
                     Log.e(TAG, "Something Went Wrong")
             }
@@ -195,7 +174,6 @@ class BikeRequest() {
         } finally {
             client.close()
         }
-//        madeNewUser = true
     }
     suspend fun deleteCustomerTRX() {
         val client = HttpClient()
@@ -221,6 +199,5 @@ class BikeRequest() {
         } finally {
             client.close()
         }
-//        madeNewUser = true
     }
 }

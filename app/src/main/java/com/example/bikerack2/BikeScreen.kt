@@ -195,10 +195,10 @@ fun BikeScreen(navController: NavHostController) {
         // User is a new customer, add name to customer list
         if (newCustomerTRX) {
             LaunchedEffect(Unit) {
-                req.newCustomerAddTRX(customerName)
+                req.addNewCustomer(customerName)
                 req.getid(customerName)
                 customerID = req.customerID
-                req.returningCustomerAddTRX(receipt, cartTotal, customerID)
+                req.customerTRX(receipt, cartTotal, customerID)
             }
 
             refreshPage = true
@@ -207,13 +207,14 @@ fun BikeScreen(navController: NavHostController) {
         // User is a returning customer, make record of order and ID number
         if (priorCustomerTRX) {
             LaunchedEffect(Unit) {
-                req.returningCustomerAddTRX(receipt, cartTotal, customerID)
+                req.customerTRX(receipt, cartTotal, customerID)
             }
 
             // Reset Page
             refreshPage = true
         }
 
+        // User is deleting a customer from all records
         if (deleteCustomer) {
             LaunchedEffect(Unit) {
                 req.getid(customerName)
@@ -223,6 +224,7 @@ fun BikeScreen(navController: NavHostController) {
             refreshPage = true
         }
 
+        // User is adding a new customer and make a transaction
         if(newCustomerTRX) {
             Text(text = "Thank you for your first patronage $customerName!")
         } else if (priorCustomerTRX) {
@@ -231,6 +233,7 @@ fun BikeScreen(navController: NavHostController) {
             Text(text = "We'll miss you $customerName!")
         }
 
+        // A transaction was made and needs to open a new screen
         if (refreshPage) {
             Button(onClick = {
                 refreshPage = false
