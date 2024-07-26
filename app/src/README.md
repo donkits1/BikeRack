@@ -1,0 +1,1 @@
+This project contains the client-side of the Bike Rack project. Please download the seperate server-side project and create two databases for Client and TRXHistory, making sure to set up the connection properly.
